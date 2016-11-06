@@ -21,3 +21,13 @@ def construct_request_body(resource_type, **kwargs):
     data['attributes'] = attributes
     top_level['data'] = data
     return top_level
+
+
+def get_error_from_response(response):
+    error = response.json().get('errors').pop()
+    message = error.get('detail') or error.get('title')
+    return message
+
+
+def get_headers():
+    return {'Content-Type': 'application/vnd.api+json'}

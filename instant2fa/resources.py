@@ -66,8 +66,6 @@ def create_settings(distinct_id):
         string: Hosted settings page URL
 
     """
-    if not distinct_id:
-        raise ValueError('The distinct_id param cannot be null.')
     user_access_token = UserAccessToken.create(distinct_id)
     return user_access_token.hosted_page_url
 
@@ -79,8 +77,6 @@ def create_verification(distinct_id):
     Returns:
         string: Hosted verification page URL
     """
-    if not distinct_id:
-        raise ValueError('The distinct_id param cannot be null.')
     verification = VerificationRequest.create(distinct_id)
     return verification.hosted_page_url
 
@@ -96,8 +92,6 @@ def confirm_verification(distinct_id, token):
         VerificationMismatch
         VerificationFailed
     """
-    if not distinct_id or not token:
-        raise ValueError('The distinct_id and token params cannot be null.')
     verification_response = VerificationResponseToken.retrieve(token)
     if verification_response.distinct_id != distinct_id:
         raise errors.VerificationMismatch(

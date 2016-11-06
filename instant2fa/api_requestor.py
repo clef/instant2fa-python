@@ -5,7 +5,7 @@ import requests
 
 import instant2fa
 from instant2fa import errors
-
+from instant2fa import jsonapi
 
 class APIRequestor(object):
 
@@ -15,7 +15,7 @@ class APIRequestor(object):
         self.api_base = api_base or instant2fa.api_base
         self.access_key = access_key or instant2fa.access_key
         self.access_secret = access_secret or instant2fa.access_secret
-        self.headers = headers or {'Content-Type': 'application/vnd.api+json'}
+        self.headers = headers or jsonapi.get_headers()
 
     def request(self, method, path, body=None, accepted_codes=None):
         if not self.access_key:
@@ -56,4 +56,4 @@ class APIRequestor(object):
                 "Invalid response object from API. HTTP response code "
                 "was {}".format(response.status_code)
             )
-        response.raise_for_status()
+        raise errors.APIError(jsonapi.get_error_from_response(response))
