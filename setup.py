@@ -27,7 +27,7 @@ test_requirements = [
 
 setup(
     name='instant2fa',
-    version='0.1.0',
+    version='1.0.0',
     description="Instant2FA Python bindings.",
     long_description=readme + '\n\n' + history,
     author="Grace Wong",
@@ -43,7 +43,6 @@ setup(
     license="ISCL",
     zip_safe=False,
     keywords='instant2fa',
-    classifiers=['Private :: Do Not Upload'],
     test_suite='tests',
     tests_require=test_requirements,
     setup_requires=['pytest-runner']
