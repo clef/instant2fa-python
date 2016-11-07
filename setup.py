@@ -21,7 +21,8 @@ requirements = [
 test_requirements = [
     # TODO: put package test requirements here
     "mock==2.0.0",
-    "pytest"
+    "pytest",
+    "requests_mock>=1.1.0, <2.0"
 ]
 
 setup(
