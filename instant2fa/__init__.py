@@ -4,7 +4,7 @@
 
 __author__ = 'Grace Wong'
 __email__ = 'grace@getclef.com'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 api_base = 'https://api.instant2fa.com'
 access_key = None

@@ -27,7 +27,7 @@ test_requirements = [
 
 setup(
     name='instant2fa',
-    version='1.0.0',
+    version='1.0.1',
     description="Instant2FA Python bindings.",
     long_description=readme + '\n\n' + history,
     author="Grace Wong",
