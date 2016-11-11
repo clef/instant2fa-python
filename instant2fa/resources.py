@@ -66,7 +66,9 @@ def create_settings(distinct_id):
         string: Hosted settings page URL
 
     """
-    user_access_token = UserAccessToken.create(distinct_id)
+    if not distinct_id:
+        raise errors.ValidationError('A value is required for distinct_id.')
+    user_access_token = UserAccessToken.create(str(distinct_id))
     return user_access_token.hosted_page_url
 
 
@@ -77,7 +79,9 @@ def create_verification(distinct_id):
     Returns:
         string: Hosted verification page URL
     """
-    verification = VerificationRequest.create(distinct_id)
+    if not distinct_id:
+        raise errors.ValidationError('A value is required for distinct_id.')
+    verification = VerificationRequest.create(str(distinct_id))
     return verification.hosted_page_url
 
 
@@ -92,11 +96,15 @@ def confirm_verification(distinct_id, token):
         VerificationMismatch
         VerificationFailed
     """
+    if not distinct_id or not token:
+        raise errors.ValidationError(
+            'A value is required for distinct_id and token params.'
+        )
     verification_response = VerificationResponseToken.retrieve(token)
-    if verification_response.distinct_id != distinct_id:
+    if verification_response.distinct_id != str(distinct_id):
         raise errors.VerificationMismatch(
             "The distinct_id passed back from the request didn't match the "
-            "one passed into function. Are you passing in the right value for "
+            "one passed into the function. Are you passing in the right value for "
             "distinct_id?"
         )
     if verification_response.status != 'succeeded':
