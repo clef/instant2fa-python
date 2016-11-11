@@ -5,6 +5,9 @@ class Instant2FAError(Exception):
 class APIError(Instant2FAError):
     pass
 
+class ValidationError(Instant2FAError):
+    pass
+
 
 class AuthenticationError(Instant2FAError):
     pass
